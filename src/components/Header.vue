@@ -3,7 +3,7 @@
     <div class="content-main">
       <ul>
         <li class="left">
-          <Address></Address>
+          <City></City>
         </li>
         <li>手机YO</li>
         <li>丨</li>
@@ -17,13 +17,19 @@
           >
         </li>
         <li>丨</li>
-        <li v-if="token === undefined && userName === undefined">
+        <li
+          v-if="(token === undefined || token === '') && userName === undefined"
+        >
           <router-link to="/login">您好，请登录</router-link>
         </li>
-        <li v-if="token === undefined && userName !== undefined">
+        <li
+          v-if="(token === undefined || token === '') && userName !== undefined"
+        >
           <router-link to="/login">{{ userName }} ，请登录</router-link>
         </li>
-        <li v-if="token !== undefined && userName !== undefined">
+        <li
+          v-if="token !== undefined && token !== '' && userName !== undefined"
+        >
           {{ userName }}
         </li>
       </ul>
@@ -32,14 +38,14 @@
 </template>
 
 <script>
-import Address from "@/components/Address";
+import City from "@/components/City";
 import { mapGetters } from "vuex";
 export default {
   data() {
     return {};
   },
   components: {
-    Address
+    City
   },
   computed: {
     ...mapGetters(["token", "userName"])

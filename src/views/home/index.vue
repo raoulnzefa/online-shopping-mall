@@ -75,17 +75,6 @@ export default {
     Coupon,
     Channel,
     User
-  },
-  mounted() {
-    // this.addEventListion();
-  },
-  methods: {
-    addEventListion() {
-      window.addEventListener("scroll", () => {
-        let e = document.body.scrollTop || document.documentElement.scrollTop;
-        if (e > 267) this.show = true;
-      });
-    }
   }
 };
 </script>

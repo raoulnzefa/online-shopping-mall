@@ -47,9 +47,13 @@ export default {
   },
   methods: {
     getNews() {
-      getNews().then(res => {
-        this.newsList = res.data.newsList;
-      });
+      getNews()
+        .then(res => {
+          this.newsList = res.data.newsList;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

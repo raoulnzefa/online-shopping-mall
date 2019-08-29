@@ -1,5 +1,11 @@
 import { login, getUserInfo } from "@/api/user";
-import { getToken, setToken, getUserName, setUserName } from "@/util/cookies";
+import {
+  getToken,
+  setToken,
+  removeToken,
+  getUserName,
+  setUserName
+} from "@/util/cookies";
 
 const state = {
   token: getToken(),
@@ -48,6 +54,15 @@ const actions = {
         .catch(error => {
           reject(error);
         });
+    });
+  },
+
+  // remove token
+  resetToken({ commit }) {
+    return new Promise(resolve => {
+      commit("SET_TOKEN", "");
+      removeToken();
+      resolve();
     });
   }
 };

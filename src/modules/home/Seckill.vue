@@ -66,10 +66,14 @@ export default {
   },
   methods: {
     getSeckillShopping() {
-      getSeckillShopping().then(res => {
-        this.seckillShoppingList = res.data.seckillShoppingList;
-        this.seckillBrandList = res.data.seckillBrandList;
-      });
+      getSeckillShopping()
+        .then(res => {
+          this.seckillShoppingList = res.data.seckillShoppingList;
+          this.seckillBrandList = res.data.seckillBrandList;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

@@ -4,6 +4,7 @@ const tokenKey = "token";
 const name = "name";
 const shoppingCountKey = "scount";
 const shoppingPriceKey = "sprice";
+const historySearchKey = "historySearch";
 
 export function getToken() {
   return Cookies.get(tokenKey);
@@ -51,4 +52,16 @@ export function setShoppingPrice(shoppingPrice) {
 
 export function removeShoppingPrice() {
   return Cookies.remove(shoppingPriceKey);
+}
+
+export function getHistorySearch() {
+  return Cookies.get(historySearchKey);
+}
+
+export function setHistorySearch(historySearch) {
+  return Cookies.set(historySearchKey, historySearch, { expires: 30 });
+}
+
+export function removeHistorySearch() {
+  return Cookies.remove(historySearchKey);
 }

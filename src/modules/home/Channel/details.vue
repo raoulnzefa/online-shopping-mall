@@ -61,9 +61,13 @@ export default {
   },
   methods: {
     getChannelType() {
-      getChannelType().then(res => {
-        this.dataList = res.data.channel;
-      });
+      getChannelType()
+        .then(res => {
+          this.dataList = res.data.channel;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

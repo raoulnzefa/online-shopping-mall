@@ -23,9 +23,13 @@ export default {
   },
   methods: {
     getCarousel() {
-      getCarousel().then(res => {
-        this.carouselList = res.data.carouselList;
-      });
+      getCarousel()
+        .then(res => {
+          this.carouselList = res.data.carouselList;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

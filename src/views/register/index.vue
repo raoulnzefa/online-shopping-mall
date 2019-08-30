@@ -13,7 +13,7 @@
               <span>欢迎注册</span>
             </div>
             <el-form ref="registerForm" :model="registerForm" :rules="rules">
-              <el-form-item prop="registerEmail" :error="errorEmail">
+              <el-form-item prop="email">
                 <el-input
                   v-model="registerForm.email"
                   placeholder="邮箱"
@@ -75,13 +75,18 @@
 
 <script>
 import { register } from "@/api/user";
+import { verifyEmail } from "@/util/index";
 export default {
   data() {
     const validateregisterEmail = (rule, value, callback) => {
       if (value == "") {
         callback(new Error("邮箱不能为空"));
       } else {
-        callback();
+        if (!verifyEmail(value)) {
+          callback(new Error("邮箱格式有误"));
+        } else {
+          callback();
+        }
       }
     };
     const validateregisterName = (rule, value, callback) => {
@@ -115,7 +120,7 @@ export default {
         confirmPassword: ""
       },
       rules: {
-        registerEmail: [
+        email: [
           { required: true, trigger: "blur", validator: validateregisterEmail }
         ],
         registerName: [

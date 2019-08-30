@@ -34,7 +34,7 @@ const actions = {
           const { data } = response;
           commit("SET_TOKEN", data.token);
           setToken(data.token);
-          resolve();
+          resolve(data);
         })
         .catch(error => {
           reject(error);
@@ -42,9 +42,9 @@ const actions = {
     });
   },
 
-  getUserInfo({ commit }) {
+  getUserInfo({ commit }, userId) {
     return new Promise((reslove, reject) => {
-      getUserInfo()
+      getUserInfo(userId)
         .then(response => {
           const { data } = response;
           commit("SET_USER_NAME", data.userName);

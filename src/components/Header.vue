@@ -18,6 +18,18 @@
         </li>
         <li>丨</li>
         <li
+          v-if="token !== undefined && token !== '' && userName !== undefined"
+          @click="logout()"
+          style="cursor: pointer;"
+        >
+          退出
+        </li>
+        <li
+          v-if="token !== undefined && token !== '' && userName !== undefined"
+        >
+          丨
+        </li>
+        <li
           v-if="(token === undefined || token === '') && userName === undefined"
         >
           <router-link to="/login">您好，请登录</router-link>
@@ -49,6 +61,16 @@ export default {
   },
   computed: {
     ...mapGetters(["token", "userName"])
+  },
+  methods: {
+    logout() {
+      this.$store
+        .dispatch("resetToken")
+        .then(() => {})
+        .catch(err => {
+          console.log("退出失败：" + err);
+        });
+    }
   }
 };
 </script>

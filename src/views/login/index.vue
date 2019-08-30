@@ -80,8 +80,8 @@ export default {
     };
     return {
       loginForm: {
-        loginName: "",
-        password: ""
+        loginName: "2212358384@qq.com",
+        password: "123456"
       },
       rules: {
         loginName: [
@@ -101,9 +101,9 @@ export default {
         if (valid) {
           this.$store
             .dispatch("login", this.loginForm)
-            .then(() => {
+            .then(res => {
               this.errorMessage = "";
-              this.getUserInfo();
+              this.getUserInfo(res.userId);
             })
             .catch(err => {
               this.errorMessage = err;
@@ -111,9 +111,9 @@ export default {
         }
       });
     },
-    getUserInfo() {
+    getUserInfo(userId) {
       this.$store
-        .dispatch("getUserInfo")
+        .dispatch("getUserInfo", userId)
         .then(() => {
           this.$router.push("/");
         })

@@ -20,7 +20,7 @@
                   type="text"
                 ></el-input>
               </el-form-item>
-              <el-form-item prop="registerName">
+              <el-form-item prop="name">
                 <el-input
                   v-model="registerForm.name"
                   placeholder="用户名"
@@ -123,7 +123,7 @@ export default {
         email: [
           { required: true, trigger: "blur", validator: validateregisterEmail }
         ],
-        registerName: [
+        name: [
           { required: true, trigger: "blur", validator: validateregisterName }
         ],
         password: [

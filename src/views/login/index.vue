@@ -28,14 +28,19 @@
                   type="password"
                 ></el-input>
               </el-form-item>
-              <router-link to="/register" style="float:right"
-                ><el-button type="text">立即注册</el-button></router-link
-              >
+              <!-- <el-button type="text" style="float:right;">忘记密码</el-button> -->
               <el-button
-                type="primary"
+                type="danger"
                 style="width:100%;"
                 @click.native.prevent="handleLogin"
                 >登陆</el-button
+              >
+              <el-divider></el-divider>
+              <el-button type="text" @click="handleLoginGithub"
+                >Github</el-button
+              >
+              <router-link to="/register" style="float:right;"
+                ><el-button type="text">立即注册</el-button></router-link
               >
             </el-form>
           </el-card>
@@ -62,6 +67,9 @@
 </template>
 
 <script>
+const client_id = "89420a1175447090c216";
+const authorize_uri = "https://github.com/login/oauth/authorize";
+const redirect_uri = "http://192.168.2.79:8080/login";
 export default {
   data() {
     const validateLoginName = (rule, value, callback) => {
@@ -94,6 +102,12 @@ export default {
       errorMessage: ""
     };
   },
+  mounted() {
+    const code = this.$route.query.code;
+    if (code) {
+      this.oauthRedirect(code);
+    }
+  },
   methods: {
     handleLogin() {
       this.errorMessage = "";
@@ -110,6 +124,21 @@ export default {
             });
         }
       });
+    },
+    handleLoginGithub() {
+      const href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`;
+      window.open(href, "_self");
+    },
+    oauthRedirect(code) {
+      this.$store
+        .dispatch("oauthRedirect", code)
+        .then(res => {
+          this.errorMessage = "";
+          this.getUserInfo(res.userId);
+        })
+        .catch(err => {
+          this.errorMessage = err;
+        });
     },
     getUserInfo(userId) {
       this.$store
@@ -140,6 +169,9 @@ export default {
       height: 100%;
       span {
         font-size: 16px;
+      }
+      .el-button--text {
+        color: #dd6161;
       }
     }
   }

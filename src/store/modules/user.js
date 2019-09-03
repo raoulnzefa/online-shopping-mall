@@ -1,4 +1,4 @@
-import { login, getUserInfo } from "@/api/user";
+import { register, login, oauthRedirect, getUserInfo } from "@/api/user";
 import {
   getToken,
   setToken,
@@ -27,6 +27,21 @@ const mutations = {
 };
 
 const actions = {
+  register({ commit }, userInfo) {
+    return new Promise((resolve, reject) => {
+      register(userInfo)
+        .then(response => {
+          const { data } = response;
+          commit("SET_TOKEN", data.token);
+          setToken(data.token);
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
       login(userInfo)
@@ -42,8 +57,24 @@ const actions = {
     });
   },
 
+  oauthRedirect({ commit }, code) {
+    return new Promise((resolve, reject) => {
+      oauthRedirect(code)
+        .then(response => {
+          const { data } = response;
+          commit("SET_TOKEN", data.token);
+          setToken(data.token);
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+
   getUserInfo({ commit }, userId) {
     return new Promise((reslove, reject) => {
+      console.log(userId);
       getUserInfo(userId)
         .then(response => {
           const { data } = response;

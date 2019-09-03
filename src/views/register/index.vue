@@ -13,7 +13,7 @@
               <span>欢迎注册</span>
             </div>
             <el-form ref="registerForm" :model="registerForm" :rules="rules">
-              <el-form-item prop="email">
+              <el-form-item prop="email" :error="errorMessage">
                 <el-input
                   v-model="registerForm.email"
                   placeholder="邮箱"
@@ -44,7 +44,7 @@
                 ></el-input>
               </el-form-item>
               <el-button
-                type="primary"
+                type="danger"
                 style="width:100%;"
                 @click.native.prevent="handleregister"
                 >注册</el-button
@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import { register } from "@/api/user";
 import { verifyEmail } from "@/util/index";
 export default {
   data() {
@@ -117,7 +116,8 @@ export default {
         email: "",
         name: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        registerType: 1
       },
       rules: {
         email: [
@@ -137,28 +137,29 @@ export default {
           }
         ]
       },
-      errorEmail: ""
+      errorMessage: ""
     };
   },
   methods: {
     handleregister() {
-      this.errorEmail = "";
+      this.errorMessage = "";
       this.$refs.registerForm.validate(valid => {
         if (valid) {
-          register(this.registerForm)
-            .then(() => {
-              this.$message.success("注册成功");
-              this.$router.push({ path: "/login" });
+          this.$store
+            .dispatch("register", this.registerForm)
+            .then(res => {
+              this.errorMessage = "";
+              this.getUserInfo(res.userId);
             })
             .catch(err => {
-              this.errorEmail = err;
+              this.errorMessage = err;
             });
         }
       });
     },
-    getUserInfo() {
+    getUserInfo(userId) {
       this.$store
-        .dispatch("getUserInfo")
+        .dispatch("getUserInfo", userId)
         .then(() => {
           this.$router.push("/");
         })

@@ -16,9 +16,22 @@ export function login(data) {
   });
 }
 
-export function getUserInfo() {
+export function oauthRedirect(code) {
+  return request({
+    url: "/oauth/redirect",
+    method: "get",
+    params: {
+      code
+    }
+  });
+}
+
+export function getUserInfo(userId) {
   return request({
     url: "/userInfo",
-    method: "get"
+    method: "get",
+    params: {
+      userId
+    }
   });
 }

@@ -15,7 +15,9 @@
     </div>
     <div class="content-main">
       <div class="result-list">
-        <div class="reuslt-side"></div>
+        <div class="reuslt-side">
+          <Side></Side>
+        </div>
         <div class="result-main">
           <Main></Main>
         </div>
@@ -29,6 +31,7 @@ import Search from "@/components/Search";
 import Logo from "@/components/Logo";
 import Trolley from "@/modules/home/Trolley";
 import Main from "@/modules/search/main/index";
+import Side from "@/modules/search/side";
 export default {
   data() {
     return {
@@ -40,7 +43,8 @@ export default {
     Logo,
     Search,
     Trolley,
-    Main
+    Main,
+    Side
   }
 };
 </script>

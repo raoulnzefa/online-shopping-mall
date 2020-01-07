@@ -74,7 +74,6 @@ const actions = {
 
   getUserInfo({ commit }, userId) {
     return new Promise((reslove, reject) => {
-      console.log(userId);
       getUserInfo(userId)
         .then(response => {
           const { data } = response;

@@ -31,6 +31,7 @@ server.interceptors.response.use(
   },
   error => {
     const response = error.response;
+    console.log(response.status);
     if (response.status === 401) {
       store.dispatch("resetToken").then(() => {});
     }

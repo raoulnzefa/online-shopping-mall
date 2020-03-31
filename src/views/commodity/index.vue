@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="commodity">
     <div class="logo-search-trolley">
       <div class="content-main">
         <div class="logo">
@@ -15,13 +15,13 @@
     </div>
     <div class="nav-line"></div>
     <div class="content-main">
-      <div class="result-list">
-        <div class="reuslt-side">
-          <Side></Side>
-        </div>
-        <div class="result-main">
-          <Main></Main>
-        </div>
+      <div class="content-top">
+        <Images></Images>
+        <Attribute></Attribute>
+      </div>
+      <div class="content-bottom">
+        <Store></Store>
+        <Details></Details>
       </div>
     </div>
   </div>
@@ -31,8 +31,10 @@
 import Search from "@/components/Search";
 import Logo from "@/components/Logo";
 import Trolley from "@/modules/home/Trolley";
-import Main from "@/modules/search/main/index";
-import Side from "@/modules/search/Side";
+import Images from "@/modules/commodity/Images";
+import Attribute from "@/modules/commodity/Attribute";
+import Store from "@/modules/commodity/Store";
+import Details from "@/modules/commodity/details/index";
 export default {
   data() {
     return {
@@ -44,14 +46,16 @@ export default {
     Logo,
     Search,
     Trolley,
-    Main,
-    Side
+    Images,
+    Attribute,
+    Store,
+    Details
   }
 };
 </script>
 
 <style lang="less" scoped>
-.search {
+.commodity {
   background-color: #fff;
   .logo-search-trolley {
     background: #fff;
@@ -90,17 +94,18 @@ export default {
     width: 1200px;
     margin: 0 auto;
     height: 100%;
-  }
-  .result-list {
-    margin-top: 20px;
-    .reuslt-side {
-      width: 180px;
-      margin-right: 10px;
-      float: left;
+    .content-top {
+      width: 100%;
+      height: 100%;
+      margin-top: 20px;
+      display: inline-block;
     }
-    .result-main {
-      width: 1010px;
-      float: left;
+    .content-bottom {
+      width: 100%;
+      height: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
     }
   }
 }

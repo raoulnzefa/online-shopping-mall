@@ -3,15 +3,19 @@
     <div class="result-filter">
       <Filters></Filters>
     </div>
-    <div class="result-shopping-list"></div>
+    <div class="result-shopping-list">
+      <router-link :to="{ path: '/commodity' }"><List></List></router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import Filters from "./filter/index";
+import List from "./list/index";
 export default {
   components: {
-    Filters
+    Filters,
+    List
   }
 };
 </script>
